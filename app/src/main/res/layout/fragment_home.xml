@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="Bienvenue"
+        android:text="Bienvenue!"
         android:textColor="#1E1D1D"
         android:textSize="48sp" />
 
