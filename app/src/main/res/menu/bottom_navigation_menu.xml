@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:title="@string/home"
+        android:icon="@drawable/page_daccueil" />
+    <item
+        android:id="@+id/navigation_Liste"
+        android:title="@string/liste"
+        android:icon="@drawable/liste" />
+    <item
+        android:id="@+id/navigation_historique"
+        android:title="@string/historique"
+        android:icon="@drawable/bouton_dhorloge_historique" />
+
+</menu>

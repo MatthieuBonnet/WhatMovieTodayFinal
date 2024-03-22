@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.WhatMovieTodayFinal" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Ajoutez la couleur de la barre de navigation ici -->
+        <item name="android:navigationBarColor">@color/couleur_noire</item>
+    </style>
+
+    <style name="Theme.WhatMovieTodayFinal" parent="Base.Theme.WhatMovieTodayFinal" />
+</resources>
