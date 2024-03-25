@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ListeFragment">
 
-    <!-- ImageView avec l'image de fond -->
     <ImageView
         android:id="@+id/imageViewBackground"
         android:layout_width="match_parent"
@@ -13,13 +13,46 @@
         android:scaleType="centerCrop"
         android:src="@drawable/design_sans_titre_29" />
 
-    <!-- TextView pour le texte -->
     <TextView
+        android:id="@+id/textViewGenre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Liste"
-        android:textSize="24sp"
+        android:text="Genre:"
+        android:textSize="18sp"
         android:textColor="#FFFFFF"
-        android:layout_centerInParent="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/imageViewBackground" />
+
+    <TextView
+        android:id="@+id/textViewAnnee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Année:"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/textViewGenre" />
+
+    <TextView
+        android:id="@+id/textViewDuree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Durée:"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/textViewAnnee" />
+
+    <Button
+        android:id="@+id/buttonAddMedia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

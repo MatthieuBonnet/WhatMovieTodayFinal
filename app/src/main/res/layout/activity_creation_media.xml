@@ -5,13 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Ajout des contraintes pour positionner l'image -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/design_sans_titre_29"
-        android:scaleType="centerCrop" />
+        android:src="@drawable/design_sans_titre_38"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Titre -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -19,123 +25,137 @@
         android:text="Création d'un média"
         android:textSize="25sp"
         android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="32dp" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="338dp"
-        android:layout_height="583dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:srcCompat="@drawable/design_sans_titre_71"
-        tools:layout_editor_absoluteY="74dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="32dp" />
 
-    <TextView
-        android:id="@+id/textView3"
+    <!-- Conteneur pour les éléments -->
+    <LinearLayout
+        android:id="@+id/container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Titre :"
-        android:textColor="#EFDFDF"
-        tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="100dp" />
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
 
-    <EditText
-        android:id="@+id/editTextText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Titre"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="136dp" />
+        <!-- Titre -->
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Catégorie :"
-        android:textColor="#EFDFDF"
-        tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="203dp" />
+        <!-- Champ Titre -->
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Titre :"
+            android:textColor="#EFDFDF"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
 
-    <EditText
-        android:id="@+id/editTextText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Catégorie"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="250dp" />
+        <EditText
+            android:id="@+id/editTextTitre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:singleLine="false"
+            android:text=""
+            android:textColorLink="#941891" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Genre :"
-        android:textColor="#EFDFDF"
-        tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="325dp" />
+        <!-- Catégorie -->
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Catégorie :"
+            android:textColor="#EFDFDF"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
 
-    <EditText
-        android:id="@+id/editTextText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Genre"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="370dp" />
+        <!-- Champ Catégorie -->
+        <EditText
+            android:id="@+id/editTextCategorie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Année de sortie :"
-        android:textColor="#EFDFDF"
-        tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="447dp" />
+        <!-- Genre -->
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Genre :"
+            android:textColor="#EFDFDF"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
 
-    <EditText
-        android:id="@+id/editTextText5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Année de sortie"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="487dp" />
+        <!-- Champ Genre -->
+        <EditText
+            android:id="@+id/editTextTextGenre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Durée :"
-        android:textColor="#EFDFDF"
-        tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="547dp" />
+        <!-- Année de sortie -->
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Année de sortie :"
+            android:textColor="#EFDFDF"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
 
-    <EditText
-        android:id="@+id/editTextText6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Durée"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="585dp" />
+        <!-- Champ Année de sortie -->
+        <EditText
+            android:id="@+id/editTextTextAnnee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="" />
 
+        <!-- Durée -->
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Durée :"
+            android:textColor="#EFDFDF"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
+
+        <!-- Champ Durée -->
+        <EditText
+            android:id="@+id/editTextTextDuree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="" />
+    </LinearLayout>
+
+    <!-- Bouton Soumettre -->
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="88dp"
         android:text="Soumettre"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="672dp" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
