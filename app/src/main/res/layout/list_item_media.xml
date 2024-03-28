@@ -45,6 +45,17 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/delete_button_description"
                 android:src="@drawable/disposition" />
+            <ImageButton
+                android:id="@+id/buttonArchive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/buttonDelete"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:contentDescription="Archive Button"
+                android:src="@drawable/histo" />
+
         </RelativeLayout>
+
 
     </RelativeLayout>

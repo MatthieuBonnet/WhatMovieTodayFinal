@@ -14,25 +14,25 @@
         android:scaleType="centerCrop"
         android:src="@drawable/design_sans_titre_29" />
 
+    <!-- Titre -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Votre liste de film"
+        android:textColor="#FFEB3B"
+        android:textSize="24sp"
+        android:textStyle="bold|italic" />
+
     <!-- ListView pour afficher les résultats -->
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/buttonAddMedia" />
-
-    <!-- Titre de la section -->
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:layout_below="@id/imageViewBackground"
-        android:text="Résultats de la Base de Données" />
+        android:layout_above="@id/buttonAddMedia"
+        android:layout_below="@id/textViewTitle" />
 
     <!-- Bouton d'ajout -->
     <Button
@@ -43,5 +43,6 @@
         android:layout_margin="16dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+    <!-- Ajoute ce bouton dans ton layout -->
 
 </RelativeLayout>

@@ -22,6 +22,7 @@ class ListeFragment : Fragment() {
 
     private lateinit var listView: ListView
     private lateinit var arrayAdapter: CustomArrayAdapter
+    private val filteredMediaList = ArrayList<Media>() // Liste filtrée pour les médias avec historique = 0
     private var dataLoaded = false
 
     override fun onCreateView(
@@ -31,7 +32,7 @@ class ListeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_liste, container, false)
 
         listView = view.findViewById(R.id.listView)
-        arrayAdapter = CustomArrayAdapter(requireContext(), ArrayList())
+        arrayAdapter = CustomArrayAdapter(requireContext(), filteredMediaList) // Utiliser la liste filtrée
         listView.adapter = arrayAdapter
 
         val buttonAddMedia = view.findViewById<Button>(R.id.buttonAddMedia)
@@ -63,8 +64,8 @@ class ListeFragment : Fragment() {
     private fun loadMediaData() {
         val dbHelper = DatabaseHelper(requireContext())
         val mediaList = dbHelper.getAllMedia()
-        arrayAdapter.clear()
-        arrayAdapter.addAll(mediaList)
+        filteredMediaList.clear() // Effacer la liste filtrée avant de la remplir à nouveau
+        filteredMediaList.addAll(mediaList.filter { it.historique == 0 }) // Filtrer les médias avec historique = 0
         arrayAdapter.notifyDataSetChanged()
     }
 
@@ -93,9 +94,19 @@ class ListeFragment : Fragment() {
                     loadMediaData()
                 }
             }
+
+            view.findViewById<ImageButton>(R.id.buttonArchive).setOnClickListener {
+                currentItem?.let { media ->
+                    Log.d("CustomArrayAdapter", "Archive button clicked for item: $media")
+                    val dbHelper = DatabaseHelper(context)
+                    dbHelper.archiveMedia(media.id)
+
+                    // Après l'archivage, actualisez la liste des médias
+                    loadMediaData()
+                }
+            }
             return view
         }
-
     }
 
     companion object {

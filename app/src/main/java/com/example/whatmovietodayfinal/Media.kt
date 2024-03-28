@@ -6,5 +6,6 @@ data class Media(
     val categorie: String,
     val genre: String,
     val annee: String,
-    val duree: String
+    val duree: String,
+    val historique: Int
 )

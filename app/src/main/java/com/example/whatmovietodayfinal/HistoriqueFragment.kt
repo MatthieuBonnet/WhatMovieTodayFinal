@@ -1,59 +1,88 @@
 package com.example.whatmovietodayfinal
-
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ListView
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HistoriqueFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HistoriqueFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var listView: ListView
+    private lateinit var arrayAdapter: CustomArrayAdapter
+    private val filteredMediaList = ArrayList<Media>() // Liste filtrée pour les médias avec historique = 1
+    private var dataLoaded = false
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_historique, container, false)
+        val view = inflater.inflate(R.layout.fragment_historique, container, false)
+
+        listView = view.findViewById(R.id.listViewHistorique)
+        arrayAdapter = CustomArrayAdapter(requireContext(), filteredMediaList)
+        listView.adapter = arrayAdapter
+
+        // Supprimer toute référence au bouton Historique
+
+        if (!dataLoaded) {
+            loadHistoriqueData()
+            dataLoaded = true
+        }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HistoriqueFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HistoriqueFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
+
+
+    private fun loadHistoriqueData() {
+        val dbHelper = DatabaseHelper(requireContext())
+        val mediaList = dbHelper.getAllMedia().filter { it.historique == 1 } // Filtrer les médias avec historique = 1
+        filteredMediaList.clear() // Effacer la liste filtrée avant de la remplir à nouveau
+        filteredMediaList.addAll(mediaList)
+        arrayAdapter.notifyDataSetChanged()
+    }
+
+    inner class CustomArrayAdapter(context: Context, objects: ArrayList<Media>) :
+        ArrayAdapter<Media>(context, android.R.layout.simple_list_item_1, objects) {
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item_media, parent, false)
+            val currentItem = getItem(position)
+
+            val titleTextView = view.findViewById<TextView>(R.id.textViewTitle)
+            val detailsTextView = view.findViewById<TextView>(R.id.textViewDetails)
+
+            titleTextView.text = currentItem?.titre
+            detailsTextView.text = "Catégorie: ${currentItem?.categorie}\nGenre: ${currentItem?.genre}\nAnnée: ${currentItem?.annee}\nDurée: ${currentItem?.duree}"
+
+            titleTextView.setTypeface(null, Typeface.BOLD) // Pour mettre le titre en gras
+
+            view.findViewById<ImageButton>(R.id.buttonDelete).setOnClickListener {
+                currentItem?.let { media ->
+                    Log.d("CustomArrayAdapter", "Delete button clicked for item: $media")
+                    val dbHelper = DatabaseHelper(context)
+                    dbHelper.deleteMedia(media.id)
+
+                    // Après la suppression, actualisez la liste des médias
+                    loadHistoriqueData()
                 }
-            }
+
+                }
+
+            return view
+        }
     }
 }

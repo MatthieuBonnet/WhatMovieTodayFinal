@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_historique.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".HistoriqueFragment">
+    android:layout_height="match_parent">
 
-    <!-- ImageView avec l'image de fond -->
+    <!-- Image de fond -->
     <ImageView
         android:id="@+id/imageViewBackground"
         android:layout_width="match_parent"
@@ -13,14 +11,23 @@
         android:scaleType="centerCrop"
         android:src="@drawable/design_sans_titre_29" />
 
-    <!-- TextView pour le texte -->
+    <!-- Titre -->
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Historique"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Votre Historique de film"
+        android:textColor="#FFEB3B"
         android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:layout_centerInParent="true" />
+        android:textStyle="bold|italic" />
+
+    <!-- Déclaration de la ListView avec l'ID listViewHistorique -->
+    <ListView
+        android:id="@+id/listViewHistorique"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textViewTitle" />
 
 </RelativeLayout>
