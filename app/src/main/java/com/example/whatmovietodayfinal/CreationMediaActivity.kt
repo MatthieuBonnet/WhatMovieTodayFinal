@@ -14,6 +14,8 @@ class CreationMediaActivity : AppCompatActivity() {
     private lateinit var editTextDuree: EditText
     private lateinit var buttonSubmit: Button
 
+    private var lastInsertedId: Long = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creation_media)
@@ -33,10 +35,19 @@ class CreationMediaActivity : AppCompatActivity() {
             val duree = editTextDuree.text.toString()
 
             val dbHelper = DatabaseHelper(this)
-            dbHelper.insertMedia(titre, categorie, genre, annee, duree)
+            val insertedId = dbHelper.insertMedia(titre, categorie, genre, annee, duree)
+
+            if (insertedId != -1L) {
+                lastInsertedId = insertedId
+            }
 
             setResult(RESULT_OK)
             finish()
         }
+    }
+
+    // Getter method to access last inserted ID from outside
+    fun getLastInsertedId(): Long {
+        return lastInsertedId
     }
 }

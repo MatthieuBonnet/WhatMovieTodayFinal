@@ -1,11 +1,11 @@
 package com.example.whatmovietodayfinal
 
-
-
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 class DatabaseHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -51,25 +51,20 @@ class DatabaseHelper(context: Context) :
         return id
     }
 
-    fun getAllMedia(): ArrayList<String> {
-        val mediaList = ArrayList<String>()
+    @SuppressLint("Range")
+    fun getAllMedia(): ArrayList<Media> {
+        val mediaList = ArrayList<Media>()
         val db = this.readableDatabase
         val cursor = db.rawQuery("SELECT * FROM $TABLE_MEDIA", null)
         cursor.use {
             while (it.moveToNext()) {
-                val titreIndex = it.getColumnIndex(COLUMN_TITRE)
-                val categorieIndex = it.getColumnIndex(COLUMN_CATEGORIE)
-                val genreIndex = it.getColumnIndex(COLUMN_GENRE)
-                val anneeIndex = it.getColumnIndex(COLUMN_ANNEE)
-                val dureeIndex = it.getColumnIndex(COLUMN_DUREE)
-
-                val titre = it.getString(titreIndex)
-                val categorie = it.getString(categorieIndex)
-                val genre = it.getString(genreIndex)
-                val annee = it.getString(anneeIndex)
-                val duree = it.getString(dureeIndex)
-
-                mediaList.add("$titre - $categorie - $genre - $annee - $duree")
+                val id = it.getLong(it.getColumnIndex(COLUMN_ID))
+                val titre = it.getString(it.getColumnIndex(COLUMN_TITRE))
+                val categorie = it.getString(it.getColumnIndex(COLUMN_CATEGORIE))
+                val genre = it.getString(it.getColumnIndex(COLUMN_GENRE))
+                val annee = it.getString(it.getColumnIndex(COLUMN_ANNEE))
+                val duree = it.getString(it.getColumnIndex(COLUMN_DUREE))
+                mediaList.add(Media(id, titre, categorie, genre, annee, duree))
             }
         }
         db.close()
@@ -78,8 +73,8 @@ class DatabaseHelper(context: Context) :
 
     fun deleteMedia(id: Long) {
         val db = this.writableDatabase
-        db.delete(TABLE_MEDIA, "$COLUMN_ID = ?", arrayOf(id.toString()))
+        val rowsAffected = db.delete(TABLE_MEDIA, "$COLUMN_ID = ?", arrayOf(id.toString()))
+        Log.d("DatabaseHelper", "Rows affected: $rowsAffected")
         db.close()
     }
-
 }
