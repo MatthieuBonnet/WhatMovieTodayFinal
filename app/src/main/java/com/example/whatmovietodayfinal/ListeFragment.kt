@@ -5,6 +5,7 @@ package com.example.whatmovietodayfinal
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -74,8 +75,13 @@ class ListeFragment : Fragment() {
             val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item_media, parent, false)
             val currentItem = getItem(position)
 
+            val titleTextView = view.findViewById<TextView>(R.id.textViewTitle)
             val detailsTextView = view.findViewById<TextView>(R.id.textViewDetails)
-            detailsTextView.text = currentItem?.titre
+
+            titleTextView.text = currentItem?.titre
+            detailsTextView.text = "Catégorie: ${currentItem?.categorie}\nGenre: ${currentItem?.genre}\nAnnée: ${currentItem?.annee}\nDurée: ${currentItem?.duree}"
+
+            titleTextView.setTypeface(null, Typeface.BOLD) // Pour mettre le titre en gras
 
             view.findViewById<ImageButton>(R.id.buttonDelete).setOnClickListener {
                 currentItem?.let { media ->
@@ -89,6 +95,7 @@ class ListeFragment : Fragment() {
             }
             return view
         }
+
     }
 
     companion object {

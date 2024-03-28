@@ -4,37 +4,47 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/textViewDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#666666"
-        android:layout_below="@id/textViewTitle"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="4dp" />
-
-    <!-- Bouton "poubelle" pour supprimer l'élément -->
-    <ImageButton
-        android:id="@+id/buttonDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="@string/delete_button_description"
-        android:background="@android:color/transparent"
-    android:src="@drawable/disposition" />
 
 
 
-</RelativeLayout>
+    <!-- Contenu de la bulle (vos éléments existants) -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="Catégorie: "
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/textViewDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewTitle"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="4dp"
+                android:text="Détails: "
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="20sp" />
+
+            <!-- Bouton "poubelle" pour supprimer l'élément -->
+            <ImageButton
+                android:id="@+id/buttonDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/delete_button_description"
+                android:src="@drawable/disposition" />
+        </RelativeLayout>
+
+    </RelativeLayout>

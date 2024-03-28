@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="fragment_container" type="id" />
+    <item name="listView" type="id" />
+    <item name="buttonAddMedia" type="id" />
 </resources>
