@@ -5,4 +5,5 @@
     <string name="historique">Historique</string>
     <string name="liste">Liste</string>
     <string name="home">Home</string>
+    <string name="delete_button_description" />
 </resources>

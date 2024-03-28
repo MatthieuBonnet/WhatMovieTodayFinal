@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ListeFragment">
 
+    <!-- Image de fond -->
     <ImageView
         android:id="@+id/imageViewBackground"
         android:layout_width="match_parent"
@@ -13,39 +14,27 @@
         android:scaleType="centerCrop"
         android:src="@drawable/design_sans_titre_29" />
 
+    <!-- ListView pour afficher les résultats -->
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/buttonAddMedia" />
+
+    <!-- Titre de la section -->
     <TextView
-        android:id="@+id/textViewGenre"
+        android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Genre:"
-        android:textSize="18sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         android:textColor="#FFFFFF"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/imageViewBackground" />
+        android:layout_marginTop="100dp"
+        android:layout_below="@id/imageViewBackground"
+        android:text="Résultats de la Base de Données" />
 
-    <TextView
-        android:id="@+id/textViewAnnee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Année:"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/textViewGenre" />
-
-    <TextView
-        android:id="@+id/textViewDuree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Durée:"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/textViewAnnee" />
-
+    <!-- Bouton d'ajout -->
     <Button
         android:id="@+id/buttonAddMedia"
         android:layout_width="wrap_content"

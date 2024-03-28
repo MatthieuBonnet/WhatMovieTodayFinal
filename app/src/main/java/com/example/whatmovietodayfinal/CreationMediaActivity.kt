@@ -1,6 +1,5 @@
 package com.example.whatmovietodayfinal
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -33,13 +32,10 @@ class CreationMediaActivity : AppCompatActivity() {
             val annee = editTextAnnee.text.toString()
             val duree = editTextDuree.text.toString()
 
-            val intent = Intent()
-            intent.putExtra("titre", titre)
-            intent.putExtra("categorie", categorie)
-            intent.putExtra("genre", genre)
-            intent.putExtra("annee", annee)
-            intent.putExtra("duree", duree)
-            setResult(RESULT_OK, intent)
+            val dbHelper = DatabaseHelper(this)
+            dbHelper.insertMedia(titre, categorie, genre, annee, duree)
+
+            setResult(RESULT_OK)
             finish()
         }
     }
