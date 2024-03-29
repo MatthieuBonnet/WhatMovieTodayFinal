@@ -43,13 +43,25 @@
             android:id="@+id/buttonScrollUpHistorique"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="↑" />
+            android:text="↑"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/buttonScrollDownHistorique"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="↓" />
+            android:text="↓"
+            android:textSize="24sp" />
+        <ImageButton
+            android:id="@+id/buttonDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/delete_button_description"
+            android:src="@drawable/disposition" />
 
     </LinearLayout>
 

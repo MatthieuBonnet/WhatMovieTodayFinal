@@ -56,15 +56,17 @@
             android:id="@+id/buttonScrollUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:text="↑"
-            android:layout_margin="16dp"/>
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/buttonScrollDown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:text="↓"
-            android:layout_margin="16dp"/>
+            android:textSize="24sp" />
 
     </LinearLayout>
 
