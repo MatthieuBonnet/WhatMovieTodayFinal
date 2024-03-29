@@ -1,5 +1,4 @@
 package com.example.whatmovietodayfinal
-
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
@@ -11,7 +10,7 @@ class DatabaseHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
-        private const val DATABASE_VERSION = 2 // Mettez à jour la version de la base de données
+        private const val DATABASE_VERSION = 2
         private const val DATABASE_NAME = "MediaDatabase.db"
         private const val TABLE_MEDIA = "media"
         private const val COLUMN_ID = "_id"
@@ -20,7 +19,7 @@ class DatabaseHelper(context: Context) :
         private const val COLUMN_GENRE = "genre"
         private const val COLUMN_ANNEE = "annee"
         private const val COLUMN_DUREE = "duree"
-        private const val COLUMN_HISTORIQUE = "historique" // Nouvelle colonne
+        private const val COLUMN_HISTORIQUE = "historique"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -31,7 +30,7 @@ class DatabaseHelper(context: Context) :
                 "$COLUMN_GENRE TEXT," +
                 "$COLUMN_ANNEE TEXT," +
                 "$COLUMN_DUREE TEXT," +
-                "$COLUMN_HISTORIQUE INTEGER DEFAULT 0)") // Ajouter la colonne historique avec une valeur par défaut de 0
+                "$COLUMN_HISTORIQUE INTEGER DEFAULT 0)")
         db?.execSQL(createTableQuery)
     }
 
@@ -66,7 +65,7 @@ class DatabaseHelper(context: Context) :
                 val genre = it.getString(it.getColumnIndex(COLUMN_GENRE))
                 val annee = it.getString(it.getColumnIndex(COLUMN_ANNEE))
                 val duree = it.getString(it.getColumnIndex(COLUMN_DUREE))
-                val historique = it.getInt(it.getColumnIndex(COLUMN_HISTORIQUE))  // Récupérer la valeur d'historique
+                val historique = it.getInt(it.getColumnIndex(COLUMN_HISTORIQUE))
                 mediaList.add(Media(id, titre, categorie, genre, annee, duree, historique))
             }
         }
@@ -74,21 +73,34 @@ class DatabaseHelper(context: Context) :
         return mediaList
     }
 
-
     fun deleteMedia(id: Long) {
         val db = this.writableDatabase
         val rowsAffected = db.delete(TABLE_MEDIA, "$COLUMN_ID = ?", arrayOf(id.toString()))
         Log.d("DatabaseHelper", "Rows affected: $rowsAffected")
         db.close()
     }
+
     fun archiveMedia(id: Long) {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply {
-            put(COLUMN_HISTORIQUE, 1) // Mettre à jour la colonne historique à 1
+            put(COLUMN_HISTORIQUE, 1)
         }
         val rowsAffected = db.update(TABLE_MEDIA, contentValues, "$COLUMN_ID = ?", arrayOf(id.toString()))
         Log.d("DatabaseHelper", "Rows affected by archiving: $rowsAffected")
         db.close()
     }
 
+    fun updateMedia(id: Long, titre: String, categorie: String, genre: String, annee: String, duree: String) {
+        val db = this.writableDatabase
+        val contentValues = ContentValues().apply {
+            put(COLUMN_TITRE, titre)
+            put(COLUMN_CATEGORIE, categorie)
+            put(COLUMN_GENRE, genre)
+            put(COLUMN_ANNEE, annee)
+            put(COLUMN_DUREE, duree)
+        }
+        val rowsAffected = db.update(TABLE_MEDIA, contentValues, "$COLUMN_ID = ?", arrayOf(id.toString()))
+        Log.d("DatabaseHelper", "Rows affected by updating media: $rowsAffected")
+        db.close()
+    }
 }

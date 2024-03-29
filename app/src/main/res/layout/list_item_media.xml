@@ -4,58 +4,67 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-
-
-
     <!-- Contenu de la bulle (vos éléments existants) -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/textViewTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="Catégorie: "
-                android:textColor="#000000"
-                android:textSize="25sp"
-                android:textStyle="bold|italic" />
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="Catégorie: "
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold|italic" />
 
-            <TextView
-                android:id="@+id/textViewDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textViewTitle"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="4dp"
-                android:text="Détails: "
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:textSize="20sp" />
+        <TextView
+            android:id="@+id/textViewDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTitle"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="4dp"
+            android:text="Détails: "
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="20sp" />
 
-            <!-- Bouton "poubelle" pour supprimer l'élément -->
-            <ImageButton
-                android:id="@+id/buttonDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/delete_button_description"
-                android:src="@drawable/disposition" />
-            <ImageButton
-                android:id="@+id/buttonArchive"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toStartOf="@id/buttonDelete"
-                android:layout_centerVertical="true"
-                android:background="@android:color/transparent"
-                android:contentDescription="Archive Button"
-                android:src="@drawable/histo" />
-
-        </RelativeLayout>
-
+        <!-- Bouton "poubelle" pour supprimer l'élément -->
+        <ImageButton
+            android:id="@+id/buttonDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/delete_button_description"
+        android:src="@drawable/disposition" />
+        <ImageButton
+            android:id="@+id/buttonArchive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/buttonDelete"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Archive Button"
+        android:src="@drawable/histo" />
+        <!-- Ajoutez ce bouton "Modifier" dans votre layout -->
+        <ImageButton
+            android:id="@+id/buttonEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/buttonArchive"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Edit Button"
+        android:src="@drawable/modif" />
 
     </RelativeLayout>
+
+</RelativeLayout>

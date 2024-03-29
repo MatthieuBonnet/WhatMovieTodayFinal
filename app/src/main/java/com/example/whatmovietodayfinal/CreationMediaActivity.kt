@@ -1,5 +1,8 @@
 package com.example.whatmovietodayfinal
-
+import android.app.Activity
+import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -27,22 +30,53 @@ class CreationMediaActivity : AppCompatActivity() {
         editTextDuree = findViewById(R.id.editTextTextDuree)
         buttonSubmit = findViewById(R.id.button)
 
-        buttonSubmit.setOnClickListener {
-            val titre = editTextTitre.text.toString()
-            val categorie = editTextCategorie.text.toString()
-            val genre = editTextGenre.text.toString()
-            val annee = editTextAnnee.text.toString()
-            val duree = editTextDuree.text.toString()
+        val extras = intent.extras
+        if (extras != null) {
+            editTextTitre.setText(extras.getString("media_titre", ""))
+            editTextCategorie.setText(extras.getString("media_categorie", ""))
+            editTextGenre.setText(extras.getString("media_genre", ""))
+            editTextAnnee.setText(extras.getString("media_annee", ""))
+            editTextDuree.setText(extras.getString("media_duree", ""))
 
-            val dbHelper = DatabaseHelper(this)
-            val insertedId = dbHelper.insertMedia(titre, categorie, genre, annee, duree)
+            buttonSubmit.text = "Modifier"
+            buttonSubmit.setOnClickListener {
+                val titre = editTextTitre.text.toString()
+                val categorie = editTextCategorie.text.toString()
+                val genre = editTextGenre.text.toString()
+                val annee = editTextAnnee.text.toString()
+                val duree = editTextDuree.text.toString()
 
-            if (insertedId != -1L) {
-                lastInsertedId = insertedId
+                val dbHelper = DatabaseHelper(this)
+                dbHelper.updateMedia(
+                    extras.getLong("media_id", -1),
+                    titre,
+                    categorie,
+                    genre,
+                    annee,
+                    duree
+                )
+
+                setResult(Activity.RESULT_OK)
+                finish()
             }
+        } else {
+            buttonSubmit.setOnClickListener {
+                val titre = editTextTitre.text.toString()
+                val categorie = editTextCategorie.text.toString()
+                val genre = editTextGenre.text.toString()
+                val annee = editTextAnnee.text.toString()
+                val duree = editTextDuree.text.toString()
 
-            setResult(RESULT_OK)
-            finish()
+                val dbHelper = DatabaseHelper(this)
+                val insertedId = dbHelper.insertMedia(titre, categorie, genre, annee, duree)
+
+                if (insertedId != -1L) {
+                    lastInsertedId = insertedId
+                }
+
+                setResult(Activity.RESULT_OK)
+                finish()
+            }
         }
     }
 
