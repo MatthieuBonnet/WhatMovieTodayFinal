@@ -1,4 +1,6 @@
 package com.example.whatmovietodayfinal
+
+
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
@@ -32,6 +34,19 @@ class ListeFragment : Fragment() {
         listView = view.findViewById(R.id.listView)
         arrayAdapter = CustomArrayAdapter(requireContext(), filteredMediaList)
         listView.adapter = arrayAdapter
+
+        // Références des boutons de défilement
+        val buttonScrollUp = view.findViewById<Button>(R.id.buttonScrollUp)
+        val buttonScrollDown = view.findViewById<Button>(R.id.buttonScrollDown)
+
+        // Écouteurs d'événements pour la navigation
+        buttonScrollUp.setOnClickListener {
+            listView.smoothScrollByOffset(-1) // Défilement vers le haut
+        }
+
+        buttonScrollDown.setOnClickListener {
+            listView.smoothScrollByOffset(1) // Défilement vers le bas
+        }
 
         val buttonAddMedia = view.findViewById<Button>(R.id.buttonAddMedia)
         buttonAddMedia.setOnClickListener {

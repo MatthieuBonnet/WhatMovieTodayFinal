@@ -1,8 +1,6 @@
 package com.example.whatmovietodayfinal
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
@@ -34,7 +32,18 @@ class HistoriqueFragment : Fragment() {
         arrayAdapter = CustomArrayAdapter(requireContext(), filteredMediaList)
         listView.adapter = arrayAdapter
 
-        // Supprimer toute référence au bouton Historique
+        // Références des boutons de défilement
+        val buttonScrollUp = view.findViewById<Button>(R.id.buttonScrollUpHistorique)
+        val buttonScrollDown = view.findViewById<Button>(R.id.buttonScrollDownHistorique)
+
+        // Écouteurs d'événements pour le défilement
+        buttonScrollUp.setOnClickListener {
+            listView.smoothScrollByOffset(-1) // Défilement vers le haut
+        }
+
+        buttonScrollDown.setOnClickListener {
+            listView.smoothScrollByOffset(1) // Défilement vers le bas
+        }
 
         if (!dataLoaded) {
             loadHistoriqueData()
@@ -43,9 +52,6 @@ class HistoriqueFragment : Fragment() {
 
         return view
     }
-
-
-
 
     private fun loadHistoriqueData() {
         val dbHelper = DatabaseHelper(requireContext())
@@ -79,8 +85,7 @@ class HistoriqueFragment : Fragment() {
                     // Après la suppression, actualisez la liste des médias
                     loadHistoriqueData()
                 }
-
-                }
+            }
 
             return view
         }
