@@ -1,8 +1,6 @@
 package com.example.whatmovietodayfinal
 
-
 import android.app.Activity
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
@@ -16,6 +14,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 class ListeFragment : Fragment() {
@@ -103,21 +102,23 @@ class ListeFragment : Fragment() {
                     val dbHelper = DatabaseHelper(context)
                     dbHelper.deleteMedia(media.id)
                     loadMediaData()
+                    showToast("Média supprimé avec succès")
                 }
             }
 
             view.findViewById<ImageButton>(R.id.buttonArchive).setOnClickListener {
                 currentItem?.let { media ->
-                    Log.d("CustomArrayAdapter", "Archive button clicked for item: $media")
+                    Log.d("CustomArrayAdapter", "boutton archiver pour  item: $media")
                     val dbHelper = DatabaseHelper(context)
                     dbHelper.archiveMedia(media.id)
                     loadMediaData()
+                    showToast("Média archivé avec succès")
                 }
             }
 
             view.findViewById<ImageButton>(R.id.buttonEdit).setOnClickListener {
                 currentItem?.let { media ->
-                    Log.d("CustomArrayAdapter", "Edit button clicked for item: $media")
+                    Log.d("CustomArrayAdapter", "boutton appuyer pour  item: $media")
                     val intent = Intent(context, CreationMediaActivity::class.java).apply {
                         putExtra("media_id", media.id)
                         putExtra("media_titre", media.titre)
@@ -132,6 +133,10 @@ class ListeFragment : Fragment() {
 
             return view
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

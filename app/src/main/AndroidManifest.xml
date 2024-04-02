@@ -32,5 +32,4 @@
         <activity android:name=".CreationMediaActivity" />
 
     </application>
-
 </manifest>

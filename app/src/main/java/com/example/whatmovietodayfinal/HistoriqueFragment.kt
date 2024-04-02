@@ -78,7 +78,7 @@ class HistoriqueFragment : Fragment() {
 
             view.findViewById<ImageButton>(R.id.buttonDelete).setOnClickListener {
                 currentItem?.let { media ->
-                    Log.d("CustomArrayAdapter", "Delete button clicked for item: $media")
+                    Log.d("CustomArrayAdapter", "boutton supprimer appuyer pour : $media")
                     val dbHelper = DatabaseHelper(context)
                     dbHelper.deleteMedia(media.id)
 

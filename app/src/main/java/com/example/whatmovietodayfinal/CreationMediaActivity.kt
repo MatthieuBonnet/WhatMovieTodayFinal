@@ -1,11 +1,9 @@
 package com.example.whatmovietodayfinal
 import android.app.Activity
-import android.content.ContentValues
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class CreationMediaActivity : AppCompatActivity() {
@@ -56,6 +54,8 @@ class CreationMediaActivity : AppCompatActivity() {
                     duree
                 )
 
+                showToast("Média modifié avec succès")
+
                 setResult(Activity.RESULT_OK)
                 finish()
             }
@@ -74,13 +74,18 @@ class CreationMediaActivity : AppCompatActivity() {
                     lastInsertedId = insertedId
                 }
 
+                showToast("Média ajouté avec succès")
+
                 setResult(Activity.RESULT_OK)
                 finish()
             }
         }
     }
 
-    // Getter method to access last inserted ID from outside
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
     fun getLastInsertedId(): Long {
         return lastInsertedId
     }

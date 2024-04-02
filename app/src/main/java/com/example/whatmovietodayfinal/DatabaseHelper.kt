@@ -76,7 +76,7 @@ class DatabaseHelper(context: Context) :
     fun deleteMedia(id: Long) {
         val db = this.writableDatabase
         val rowsAffected = db.delete(TABLE_MEDIA, "$COLUMN_ID = ?", arrayOf(id.toString()))
-        Log.d("DatabaseHelper", "Rows affected: $rowsAffected")
+        Log.d("DatabaseHelper", "ligne affecter: $rowsAffected")
         db.close()
     }
 
@@ -86,7 +86,7 @@ class DatabaseHelper(context: Context) :
             put(COLUMN_HISTORIQUE, 1)
         }
         val rowsAffected = db.update(TABLE_MEDIA, contentValues, "$COLUMN_ID = ?", arrayOf(id.toString()))
-        Log.d("DatabaseHelper", "Rows affected by archiving: $rowsAffected")
+        Log.d("DatabaseHelper", "Ligne affecter par archivage: $rowsAffected")
         db.close()
     }
 
@@ -100,7 +100,7 @@ class DatabaseHelper(context: Context) :
             put(COLUMN_DUREE, duree)
         }
         val rowsAffected = db.update(TABLE_MEDIA, contentValues, "$COLUMN_ID = ?", arrayOf(id.toString()))
-        Log.d("DatabaseHelper", "Rows affected by updating media: $rowsAffected")
+        Log.d("DatabaseHelper", "ligne affecter par update media: $rowsAffected")
         db.close()
     }
 }
