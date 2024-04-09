@@ -1,4 +1,5 @@
 package com.example.whatmovietodayfinal
+
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
@@ -10,9 +11,12 @@ class DatabaseHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
+        // Déclaration des constantes pour la version de la base de données, son nom et le nom de la table
         private const val DATABASE_VERSION = 2
         private const val DATABASE_NAME = "MediaDatabase.db"
         private const val TABLE_MEDIA = "media"
+
+        // Déclaration des noms de colonnes dans la table
         private const val COLUMN_ID = "_id"
         private const val COLUMN_TITRE = "titre"
         private const val COLUMN_CATEGORIE = "categorie"
@@ -22,7 +26,9 @@ class DatabaseHelper(context: Context) :
         private const val COLUMN_HISTORIQUE = "historique"
     }
 
+    // Méthode appelée lors de la création de la base de données
     override fun onCreate(db: SQLiteDatabase?) {
+        // Création de la table de médias avec les colonnes spécifiées
         val createTableQuery = ("CREATE TABLE $TABLE_MEDIA (" +
                 "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "$COLUMN_TITRE TEXT," +
@@ -34,11 +40,14 @@ class DatabaseHelper(context: Context) :
         db?.execSQL(createTableQuery)
     }
 
+    // Méthode appelée lors de la mise à jour de la base de données
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        // Suppression de la table existante et recréation de la base de données
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_MEDIA")
         onCreate(db)
     }
 
+    // Méthode pour insérer un nouveau média dans la base de données
     fun insertMedia(titre: String, categorie: String, genre: String, annee: String, duree: String): Long {
         val db = this.writableDatabase
         val contentValues = ContentValues()
@@ -52,6 +61,7 @@ class DatabaseHelper(context: Context) :
         return id
     }
 
+    // Méthode pour récupérer tous les médias de la base de données
     @SuppressLint("Range")
     fun getAllMedia(): ArrayList<Media> {
         val mediaList = ArrayList<Media>()
@@ -73,23 +83,26 @@ class DatabaseHelper(context: Context) :
         return mediaList
     }
 
+    // Méthode pour supprimer un média de la base de données
     fun deleteMedia(id: Long) {
         val db = this.writableDatabase
         val rowsAffected = db.delete(TABLE_MEDIA, "$COLUMN_ID = ?", arrayOf(id.toString()))
-        Log.d("DatabaseHelper", "ligne affecter: $rowsAffected")
+        Log.d("DatabaseHelper", "Ligne affectée: $rowsAffected")
         db.close()
     }
 
+    // Méthode pour archiver un média dans la base de données
     fun archiveMedia(id: Long) {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply {
             put(COLUMN_HISTORIQUE, 1)
         }
         val rowsAffected = db.update(TABLE_MEDIA, contentValues, "$COLUMN_ID = ?", arrayOf(id.toString()))
-        Log.d("DatabaseHelper", "Ligne affecter par archivage: $rowsAffected")
+        Log.d("DatabaseHelper", "Ligne affectée par l'archivage: $rowsAffected")
         db.close()
     }
 
+    // Méthode pour mettre à jour les informations d'un média dans la base de données
     fun updateMedia(id: Long, titre: String, categorie: String, genre: String, annee: String, duree: String) {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply {
@@ -100,7 +113,7 @@ class DatabaseHelper(context: Context) :
             put(COLUMN_DUREE, duree)
         }
         val rowsAffected = db.update(TABLE_MEDIA, contentValues, "$COLUMN_ID = ?", arrayOf(id.toString()))
-        Log.d("DatabaseHelper", "ligne affecter par update media: $rowsAffected")
+        Log.d("DatabaseHelper", "Ligne affectée par la mise à jour du média: $rowsAffected")
         db.close()
     }
 }
